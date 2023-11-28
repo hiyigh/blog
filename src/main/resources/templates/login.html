@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/layout.html :: layout(~{::head}, ~{::section})}"
+      lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,  user-scalable = no, initial-scale=1.0"/>
+  <title>717276 - 로그인</title>
+  <!-- SEO -->
+  <meta name="description" content="백엔드 쥬니어 개발자의 공부 내용을 기록하는 블로그입니다."/>
+  <meta name="keyword" content="개발, 테크, IT, 코딩, 알고리즘, 쥬니어, 개발자, 포트폴리오, 블로그, CS, 컴공지식, 컴공, 프로그래밍, 프로그래밍 언어, 비전공, 코딩 테스트, 취업, 취준"/>
+  <meta name="author" content="717276"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <link rel="icon" href="/img/favicon-16x16.png"/>
+  <link rel="apple-touch-icon" href="/img/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="16x16"  href="/img/favicon-16x16.png">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <!-- CSS RESET -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+  <link rel="stylesheet" th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/mainCss.css?ver=1.1}"/>
+  <link rel="stylesheet" th:href="@{/css/login.css}"/>
+
+  <script src="https://kit.fontawesome.com/233840a552.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<section class="login-section">
+
+  <div class=""></div>
+
+  <div class="card container login-box">
+    <p class="text-center alert" id="capsAlert" th:text="${errMsg}">로그인 오류</p>
+    <div class="d-flex flex-column card-body align-items-center justify-content-center">
+      <h5>
+        SNS 간편 가입/로그인
+      </h5>
+
+      <hr/>
+
+      <div class="col m-2">
+        <form th:action="@{/login}" method="post">
+          <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div>
+
+          </div>
+          <button type="submit" class="btn btn-primary">로그인</button>
+        </form>
+      </div>
+
+      <div class="col m-2">
+        <a href="/join">
+          <button class="btn btn-primary">회원가입</button>
+        </a>
+      </div>
+
+      <div class="col m-2">
+        <a href="/oauth2/authorization/google">
+          <button class="btnCtm btn-google">구글 로그인</button>
+        </a>
+      </div>
+
+      <div class="col m-2">
+        <a href="/oauth2/authorization/naver">
+          <button class="btnCtm btn-naver">네이버 로그인<div>(검토중)</div></button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+
+</section>
+
+</body>
+</html>

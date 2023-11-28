@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/layout.html :: layout(~{::head}, ~{::section})}"
+      lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>카테고리 편집 - 717276</title>
+    <meta name="viewport" content="width=device-width,  user-scalable = no, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <link rel="apple-touch-icon" href="/img/favicon-16x16.png"/>
+    <link rel="icon" type="image/png" sizes="16x16"  href="/img/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS RESET -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    <link rel="stylesheet" th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mainCss.css?ver=1.1}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <script src="https://kit.fontawesome.com/233840a552.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<section>
+
+    <div style="margin-bottom: 100px"></div>
+
+    <div class="container">
+
+
+        <h1 class="text-center">카테고리 편집</h1>
+        <hr class="mb-5">
+
+        <div class="row g-0">
+            <div id="categoryBox" class="categoryBox list-group list-unstyled ps-0 d-flex flex-column col-sm mb-5 text-center">
+                <th:block th:each="superCategory : ${categoryView}">
+                    <button class="list-group-item list-group-item-action list-group-item-light fw-bold"
+                            th:text="|${superCategory.getCategoryTitle()}|" th:id="|superCategory-${superCategory.getCategoryId()}|"
+                            onclick="clickCategory(this)">
+                    </button>
+
+                    <th:block th:each="subCategory : ${superCategory.getCategoryViewTreeList()}">
+                        <button class="list-group-item-action list-group-item-light list-group-item"
+                                th:text="|${subCategory.getCategoryTitle()}|"
+                                th:id="|subCategory-${subCategory.getCategoryId()}|"
+                                onclick="clickCategory(this)">
+                        </button>
+                    </th:block>
+                </th:block>
+            </div>
+
+            <div class="col-sm g-0 ms-sm-5">
+                <div class="mb-5 ">
+                    <label for="categoryName">카테고리 이름 변경</label>
+                    <input type="text" class="form-control" id="categoryName">
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                    <div>
+                        <button class="category-nav-btn " onclick="moveToParentCategory()"><i class="fas fa-angle-up"></i></button>
+                        <button class="category-nav-btn " onclick="moveToChildCategory()"><i class="fas fa-angle-down"></i></i></button>
+                    </div>
+                    <div>
+                        <button class=" category-nav-btn " onclick="addCategory()"><i class="fas fa-plus"></i></button>
+                        <button class="category-nav-btn " onclick="deleteCategory()"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center g-0">
+            <button class="btn btn-secondary col-3 me-5" onclick="applyCategory()">적 용</button>
+            <button class="btn btn-secondary col-3" onclick="javascript:history.back()">취 소</button>
+        </div>
+    </div>
+    <div style="margin-bottom:  100px"></div>
+
+    <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/getCsrf.js}"></script>
+
+    <script th:inline="javascript">
+    const categories = [[${categoryDtoForEdit}]];
+    let selector;
+    let category;
+    let categoryName = document.getElementById("categoryName");
+    let idxNewCategoryNum = 0;
+
+        function clickCategory(div) {
+            selector = div;
+            category = categories.find(x => x.categoryTitle === selector.innerText);
+            categoryName.value = selector.innerText;
+            const parentNode = selector.parentNode;
+
+            if (parentNode) {
+                const childNodes = Array.from(parentNode.childNodes);
+                childNodes.forEach(childNode => {
+                    if (childNode.classList) {
+                        childNode.classList.remove("active");
+                    }
+                });
+                selector.classList.add("active");
+            }
+        }
+
+        categoryName.addEventListener("keyup", () => {
+            selector.innerText = categoryName.value;
+            category.categoryTitle = selector.innerText;
+        });
+
+        function addCategory(){
+            const box = document.getElementById("categoryBox");
+            const newCategoryTitle = '새 카테고리' + idxNewCategoryNum;
+            const categoryExists = categories.some(category => category.categoryTitle === newCategoryTitle);
+            if (categoryExists) {
+                alert("Category with the same title already exists.");
+                return;
+            }
+
+            box.innerHTML +=`<button class="list-group-item-action list-group-item-light list-group-item" onclick="clickCategory(this)">새 카테고리${idxNewCategoryNum}</button>`
+
+            let newCategory = {};
+            newCategory.categoryId = null;
+            newCategory.categoryTitle = newCategoryTitle;
+            newCategory.count = 0;
+            newCategory.cOrder = 0;
+            newCategory.parents = selector ? selector : null;
+
+            categories.push(newCategory);
+        }
+
+        function deleteCategory() {
+             if (selector != null) {
+                 const box = document.getElementById("categoryBox");
+                 const categoryIndex = categories.findIndex(category => category.categoryId === selector.categoryId);
+                 categories.splice(categoryIndex, 1);
+                 selector.remove();
+            }
+        }
+        function applyCategory() {
+            if (categories == null) {
+                console.log("categories are null")
+                location.href = '/';
+                return;
+            }
+            let token = getCsrfToken();
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/category/edit");
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.setRequestHeader("X-XSRF-TOKEN", token);
+
+            console.log("send categories?")
+            xhr.send(JSON.stringify(categories));
+
+            xhr.onload = () => {
+                if (xhr.status === 200 || xhr.status === 201 || xhr.status === 202) {
+                    location.href='/';
+                }
+                else {
+                    alert(xhr.response);
+                }
+            }
+        }
+        function moveToParentCategory() {
+        }
+        function moveToChildCategory() {
+        }
+
+
+</script>
+
+</section>
+
+</body>
+</html>
