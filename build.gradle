@@ -116,7 +116,7 @@ compileTestKotlin {
 // NPM 설정
 
 node {
-    version = '20.9.0'
+    version = '17.0.0'
     download = true
     nodeModulesDir = file("${projectDir}/src/main/resources/static")
 }
