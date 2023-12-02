@@ -42,4 +42,4 @@ bin/
 .DS_Store
 
 application-oauth.properties
-application-mariadb.properties
+application-db.properties
