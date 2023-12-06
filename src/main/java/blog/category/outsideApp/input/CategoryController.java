@@ -3,6 +3,7 @@ package blog.category.outsideApp.input;
 import blog.category.insideApp.port.input.CategoryMethod;
 import blog.category.insideApp.port.input.DtoForResponse.CategoryDto;
 import blog.category.insideApp.port.input.DtoForResponse.CategoryViewForLayout;
+import blog.category.insideApp.port.output.CategoryMethodForConnectDB;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryMethod categoryMethod;
+    private final CategoryMethodForConnectDB categoryMethodForConnectDB;
     private final CategoryValidator categoryValidator;
     @GetMapping("/category/edit")
     public String editCategoryForm(Model model){
@@ -32,7 +34,11 @@ public class CategoryController {
     }
     @PostMapping("/category/edit")
     @ResponseBody String editCategory(@RequestBody List<CategoryDto> categoryDtoList, Errors errors) {
-        if (categoryDtoList.isEmpty() || categoryDtoList == null) throw new InvalidCategoryRequestException("categoryDtoList is empty");
+        CategoryDto baseCategoryDto = new CategoryDto();
+        if (categoryDtoList.isEmpty() || categoryDtoList == null) {
+            baseCategoryDto.setCategoryTitle("base");
+            categoryDtoList.add(baseCategoryDto);
+        }
         categoryValidator.validate(categoryDtoList, errors);
         categoryMethod.changeCategory(categoryDtoList);
         return "변경 성공";

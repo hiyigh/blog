@@ -2,7 +2,6 @@ package blog.category.domain;
 
 import blog.post.domain.Post;
 import blog.shared.domain.BasicEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +19,7 @@ public class Category extends BasicEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
-    @Column(nullable = false, length = 30, unique = true)
+    @Column(name= "category_title", nullable = false, length = 30, unique = true)
     private String categoryTitle;
 
     @OneToMany(mappedBy = "category") // post 내부 category
@@ -28,7 +27,7 @@ public class Category extends BasicEntity {
 
     private int cOrder; // sidebar 순서 정렬 및 조정
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "parents_id")
     private Category parents;
 
@@ -48,5 +47,8 @@ public class Category extends BasicEntity {
         this.parents = parents;
         this.cOrder = cOrder;
         this.child = child;
+    }
+    public Long getId() {
+        return categoryId;
     }
 }

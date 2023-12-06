@@ -16,7 +16,13 @@ public class CategoryDBAdapter implements CategoryMethodForConnectDB {
 
     @Override
     public void save(Category category) {
-        jpaCategoryDB.save(category);
+        mybatisCategoryDB.save(category);
+        System.out.println("save");
+    }
+    @Override
+    public void updateTitle(Long originId, String compareTitle) {
+        mybatisCategoryDB.update(originId, compareTitle);
+        System.out.println("update");
     }
 
     @Override

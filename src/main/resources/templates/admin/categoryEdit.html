@@ -65,7 +65,7 @@
                     </div>
                     <div>
                         <button class=" category-nav-btn " onclick="addCategory()"><i class="fas fa-plus"></i></button>
-                        <button class="category-nav-btn " onclick="deleteCategory()"><i class="fas fa-minus"></i></button>
+                        <button class=" category-nav-btn " onclick="deleteCategory()"><i class="fas fa-minus"></i></button>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,6 @@
             newCategory.count = 0;
             newCategory.cOrder = 0;
             newCategory.parents = selector ? selector : null;
-
             categories.push(newCategory);
         }
 
@@ -152,10 +151,11 @@
             xhr.open("POST", "/category/edit");
             xhr.setRequestHeader("content-type", "application/json");
             xhr.setRequestHeader("X-XSRF-TOKEN", token);
-
-            console.log("send categories?")
             xhr.send(JSON.stringify(categories));
 
+    for (let i = 0; i < categories.length; i++) {
+        console.log(categories[i].categoryTitle);
+    }
             xhr.onload = () => {
                 if (xhr.status === 200 || xhr.status === 201 || xhr.status === 202) {
                     location.href='/';
@@ -164,10 +164,6 @@
                     alert(xhr.response);
                 }
             }
-        }
-        function moveToParentCategory() {
-        }
-        function moveToChildCategory() {
         }
 
 

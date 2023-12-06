@@ -14,4 +14,5 @@ public interface CategoryMethod {
     CategoryViewForLayout getCategoryViewForLayout();
     List<CategoryDto> getCategoryCountList(); // 같은 카테고리가 몇 개 있는지
     List<CategoryDto> findAllCategoryDto();
+    void saveCategory(CategoryDto categoryDto);
 }

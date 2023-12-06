@@ -1,8 +1,11 @@
 package blog.category.outsideApp.output;
 
+import blog.category.domain.Category;
 import blog.category.insideApp.port.input.DtoForResponse.CategoryDto;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,4 +27,11 @@ public interface MybatisCategoryDB {
             "GROUP BY c.category_title, c.category_id, c.c_order, c.parents_id"
     )
     List<CategoryDto> getCategoryCount();
+
+    @Insert("INSERT INTO category (category_id, c_order, category_title, parents_id, created_date, last_modified_date) " +
+            "VALUES (#{categoryId}, #{cOrder}, #{categoryTitle}, #{parents.id}, #{createdDate}, #{lastModifiedDate})")
+    void save(Category category);
+
+    @Update("update category set category_title = #{compareTitle} where category_id = #{originId}")
+    void update(Long originId, String compareTitle);
 }

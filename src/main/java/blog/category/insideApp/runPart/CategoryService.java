@@ -24,15 +24,47 @@ public class CategoryService implements CategoryMethod {
     @Transactional
     @Override
     public void changeCategory(List<CategoryDto> categoryDtoList) {
-        List<Category> existingList = categoryMethodForConnectDB.findAll();
-        for (int i = 0; i < existingList.size(); ++i) {
-            categoryMethodForConnectDB.deleteById(existingList.get(i).getCategoryId());
+        List<Category> originCategoryList = categoryMethodForConnectDB.findAll();
+
+        if (originCategoryList.isEmpty()) {
+            for (CategoryDto dto : categoryDtoList) {
+                saveCategory(dto);
+            }
+            return;
         }
-        for (CategoryDto categoryDto : categoryDtoList) {
-            saveCategory(categoryDto);
+
+        for (CategoryDto dto : categoryDtoList) {
+            if (dto.getCategoryId() == null) {
+                saveCategory(dto);
+            } else {
+                for (Category origin : originCategoryList) {
+                    if (dto.getCategoryId().equals(origin.getCategoryId())) {
+                        if (!dto.getCategoryTitle().equals(origin.getCategoryTitle())) {
+                            categoryMethodForConnectDB.updateTitle(origin.getCategoryId(), dto.getCategoryTitle());
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        for (Category origin : originCategoryList) {
+            boolean notFound = true;
+            for (CategoryDto dto : categoryDtoList) {
+                if (origin.getCategoryId().equals(dto.getCategoryId())) {
+                    notFound = false;
+                    break;
+                }
+            }
+            if (notFound) {
+                categoryMethodForConnectDB.deleteById(origin.getCategoryId());
+            }
         }
     }
-    private void saveCategory(CategoryDto categoryDto) {
+    private boolean checkCategoryTitle(String compareTitle, String originTitle) {
+        if (originTitle.equals(compareTitle)) return true;
+        return false;
+    }
+    public void saveCategory(CategoryDto categoryDto) {
         Category newCategory = Category.builder()
                 .title(categoryDto.getCategoryTitle())
                 .cOrder(categoryDto.getCOrder())

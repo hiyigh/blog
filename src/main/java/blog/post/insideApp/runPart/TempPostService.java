@@ -35,7 +35,9 @@ public class TempPostService implements TempPostMethod {
 
     @Override
     public void deleteTemp() {
-        TempPost tempPost = tempPostMethodForConnectDB.findById(1l).orElseThrow();
-        tempPostMethodForConnectDB.delete(tempPost);
+        Optional<TempPost> tempPostOptional = tempPostMethodForConnectDB.findById(1l);
+        if (tempPostOptional.isEmpty()) return;
+        TempPost tempPost = tempPostOptional.get();
+        tempPostMethodForConnectDB.delete( tempPost);
     }
 }

@@ -13,4 +13,5 @@ public interface CategoryMethodForConnectDB { // service 에서 db 에 연결할
     List<Category> findAll();
     List<CategoryDto> getCategoryCount();
 
+    void updateTitle(Long categoryId, String compareTitle);
 }

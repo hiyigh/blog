@@ -63,9 +63,9 @@ public class PostController {
         if(errors.hasErrors()) return "post/postWriteForm";
         PostCreateCommand postCreateCommand = null;
         if (oauth2MemberDetail == null) {
-            postCreateCommand = PostCreateCommand.from(postInputForm, oauth2MemberDetail.getMemberId());
-        } else {
             postCreateCommand = PostCreateCommand.from(postInputForm, memberDetail.getMember().getMemberId());
+        } else {
+            postCreateCommand = PostCreateCommand.from(postInputForm, oauth2MemberDetail.getMemberId());
         }
         Long postId = postMethod.writePost(postCreateCommand);
         tempPostMethod.deleteTemp();
