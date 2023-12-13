@@ -58,6 +58,7 @@ public class PostController {
         return "post/postWriteForm";
     }
     @PostMapping("/post/write")
+    @Transactional
     public String writePost(@Validated PostInputForm postInputForm, @AuthenticationPrincipal Oauth2MemberDetail oauth2MemberDetail,
                             @AuthenticationPrincipal MemberDetail memberDetail, Errors errors, Model model) {
         if(errors.hasErrors()) return "post/postWriteForm";
@@ -82,6 +83,7 @@ public class PostController {
         return "post/postEditForm";
     }
     @PostMapping("/post/edit")
+    @Transactional
     public String editPost(@RequestParam Long postId, @ModelAttribute PostInputForm postInputForm) {
         PostEditCommand postDtoForEdit = PostEditCommand.from(postId, postInputForm);
         postMethod.editPost(postDtoForEdit);
@@ -95,6 +97,7 @@ public class PostController {
         return "redirect:/";
     }
     @GetMapping("post/list")
+    @Transactional
     public String getPostListByCategory(@RequestParam String categoryTitle,
                                         @RequestParam int page,
                                         Model model) {
