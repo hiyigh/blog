@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-@Transactional
 public class TagService implements TagMethod {
     private final TagMethodForConnectDB tagMethodForConnectDB;
     private final PostDtoMapper postDtoMapper;

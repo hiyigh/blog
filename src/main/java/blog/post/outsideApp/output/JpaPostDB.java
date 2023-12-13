@@ -2,7 +2,7 @@ package blog.post.outsideApp.output;
 
 import blog.category.domain.Category;
 import blog.post.domain.Post;
-import com.querydsl.core.annotations.QueryEmbedded;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +47,6 @@ public interface JpaPostDB extends JpaRepository<Post, Long> {
     List<Post> findByCategoryTitle(String categoryTitle);
 
     @Modifying
-    @Transactional
     @Query("update Post p set " +
             "p.postTitle = :postTitle, p.postContent = :postContent, p.category = :category, p.thumbnailUrl = :thumbnailUrl " +
             "where p.postId = :postId")

@@ -164,7 +164,7 @@ public class PostController {
         }
         return cnt;
     }
-    @Transactional
+
     @GetMapping("/post/view")
     public String viewPost (@RequestParam Long postId, @AuthenticationPrincipal Oauth2MemberDetail Oauth2MemberDetail,
                             @AuthenticationPrincipal MemberDetail memberDetail, @CookieValue(required = false, value = "view") String cookie,

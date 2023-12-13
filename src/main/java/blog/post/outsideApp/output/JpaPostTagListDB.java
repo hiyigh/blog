@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface JpaPostTagListDB extends JpaRepository<PostTagList, Long> {
-    @Transactional
+
     @Modifying
     @Query("delete from PostTagList t " + "where t.post =:post")
     void deleteByPost(Post post);

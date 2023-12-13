@@ -6,11 +6,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-public class Oauth2MemberDetail implements OAuth2User{
+public class    Oauth2MemberDetail implements OAuth2User, Serializable{
     private final Map<String, Object> attributes;
     private final Member member;
     private final MemberDto memberDto;

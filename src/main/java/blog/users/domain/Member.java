@@ -27,7 +27,7 @@ public class Member extends BasicEntity implements Serializable {
     @Column(nullable = false, length = 50)
     private String userName;
 
-    @Column(nullable = false)
+    @Column(length = 100)
     private String password;
 
     @Column(nullable = false, unique = true, length = 50)
@@ -60,8 +60,8 @@ public class Member extends BasicEntity implements Serializable {
         this.role = role;
         this.password = password;
     }
-    public void editUsername(String username) {
-        if(!this.userName.equals(username))
-            this.userName = username;
+    public void editUserData(String username, String password) {
+        this.userName = username;
+        this.password = password;
     }
 }

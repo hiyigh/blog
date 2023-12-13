@@ -21,7 +21,6 @@ public class CategoryService implements CategoryMethod {
     private final CategoryMethodForConnectDB categoryMethodForConnectDB;
     private final CategoryDtoMapper categoryDtoMapper;
 
-    @Transactional
     @Override
     public void changeCategory(List<CategoryDto> categoryDtoList) {
         List<Category> originCategoryList = categoryMethodForConnectDB.findAll();

@@ -28,7 +28,7 @@ public class MemberController {
 
     @GetMapping("/login") // loginFailHandler redirect 에서 error 매개변수를 가져오는 경우
     public String loginForm(@RequestParam(value = "error", required = false)String error, Model model) {
-        if(error!=null&&error.equals("OAuth2AuthenticationException")){
+        if(error!=null && error.equals("OAuth2AuthenticationException")){
             model.addAttribute("errMsg","oauth2 인증 오류");
         }
         layoutRenderingUseCase.AddLayoutTo(model);
