@@ -34,7 +34,6 @@ public interface JpaPostDB extends JpaRepository<Post, Long> {
             "order by a.postId desc ")
     Page<Post> findAllByPostTagListOrderByPostId(Pageable pageable, @Param("tagName") String tagName);
 
-    
     //키워드별 포스트 페이징 처리해서 조회, 토탈 카운트
     @Query("select a " + "from Post a " + "where a.postTitle like %:keyword% " + "or a.postContent like %:keyword% " +
             "order by a.postId desc ")

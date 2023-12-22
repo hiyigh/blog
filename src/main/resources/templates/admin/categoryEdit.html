@@ -37,19 +37,19 @@
 
         <div class="row g-0">
             <div id="categoryBox" class="categoryBox list-group list-unstyled ps-0 d-flex flex-column col-sm mb-5 text-center">
-                <th:block th:each="superCategory : ${categoryView}">
+                <th:block th:each="superCategory : ${categoryViewForLayOut.getCategoryViewTreeList()}">
                     <button class="list-group-item list-group-item-action list-group-item-light fw-bold"
                             th:text="|${superCategory.getCategoryTitle()}|" th:id="|superCategory-${superCategory.getCategoryId()}|"
                             onclick="clickCategory(this)">
                     </button>
-
-                    <th:block th:each="subCategory : ${superCategory.getCategoryViewTreeList()}">
-                        <button class="list-group-item-action list-group-item-light list-group-item"
-                                th:text="|${subCategory.getCategoryTitle()}|"
-                                th:id="|subCategory-${subCategory.getCategoryId()}|"
+                    <!--
+                    <th:block th:each="childCategory : ${superCategory.getCategoryViewTreeList()}">
+                        <button class="list-group-item list-group-item-action list-group-item-light"
+                                th:text="|${childCategory.getCategoryTitle()}|" th:id="|superCategory-${childCategory.getCategoryId()}|"
                                 onclick="clickCategory(this)">
                         </button>
                     </th:block>
+                    -->
                 </th:block>
             </div>
 
@@ -92,7 +92,7 @@
 
         function clickCategory(div) {
             selector = div;
-            category = categories.find(x => x.categoryTitle === selector.innerText);
+            category = categories.find(category => category.categoryTitle === selector.innerText);
             categoryName.value = selector.innerText;
             const parentNode = selector.parentNode;
 
@@ -114,8 +114,8 @@
 
         function addCategory(){
             const box = document.getElementById("categoryBox");
-            const newCategoryTitle = '새 카테고리' + idxNewCategoryNum;
-            const categoryExists = categories.some(category => category.categoryTitle === newCategoryTitle);
+            const newCategoryTitle = '새 카테고리' + idxNewCategoryNum++;
+            const categoryExists = categories.some(x => x.categoryTitle === newCategoryTitle);
             if (categoryExists) {
                 alert("Category with the same title already exists.");
                 return;
@@ -129,16 +129,16 @@
             newCategory.count = 0;
             newCategory.cOrder = 0;
             newCategory.parents = selector ? selector : null;
+
             categories.push(newCategory);
         }
 
         function deleteCategory() {
              if (selector != null) {
-                 const box = document.getElementById("categoryBox");
-                 const categoryIndex = categories.findIndex(category => category.categoryId === selector.categoryId);
-                 categories.splice(categoryIndex, 1);
-                 selector.remove();
-            }
+                const categoryIndex = categories.findIndex(x=>x.title === selector.innerText);
+                categories.splice(categoryIndex,1);
+                selector.remove();
+             }
         }
         function applyCategory() {
             if (categories == null) {
@@ -153,9 +153,10 @@
             xhr.setRequestHeader("X-XSRF-TOKEN", token);
             xhr.send(JSON.stringify(categories));
 
-    for (let i = 0; i < categories.length; i++) {
-        console.log(categories[i].categoryTitle);
-    }
+            for (let i = 0; i < categories.length; i++) {
+                console.log(categories[i].categoryTitle);
+            }
+
             xhr.onload = () => {
                 if (xhr.status === 200 || xhr.status === 201 || xhr.status === 202) {
                     location.href='/';

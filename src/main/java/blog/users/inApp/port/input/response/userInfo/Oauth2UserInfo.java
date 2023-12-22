@@ -13,7 +13,7 @@ public interface Oauth2UserInfo {
     String getPicture();
     Map<String, Object> getAttributes();
     default Member toEntity() {
-        return Member.builder()
+        Member temp = Member.builder()
                 .userName(this.getUserName())
                 .email(this.getEmail())
                 .userId(this.getProviderId())
@@ -22,6 +22,7 @@ public interface Oauth2UserInfo {
                 .picUrl(this.getPicture())
                 .role(Role.USER)
                 .build();
+        return temp;
     }
 
 }

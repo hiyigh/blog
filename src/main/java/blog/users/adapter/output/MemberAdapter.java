@@ -25,9 +25,7 @@ public class MemberAdapter implements MemberMethodForDB
     public Optional<Member> findByUserName(String username) {
         return jpaMemberDB.findByUserName(username);
     }
-
-    @Override
     public Optional<Member> findByProviderId(String providerId) {
-        return jpaMemberDB.findByUserName(providerId);
+        return jpaMemberDB.findByProviderId(providerId);
     }
 }

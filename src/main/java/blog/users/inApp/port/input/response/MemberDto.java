@@ -5,13 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class MemberDto {
+public class MemberDto implements Serializable {
     private Long memberId;
     private String userId;
     private String username;

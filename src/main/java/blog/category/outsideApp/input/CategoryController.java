@@ -4,6 +4,7 @@ import blog.category.insideApp.port.input.CategoryMethod;
 import blog.category.insideApp.port.input.DtoForResponse.CategoryDto;
 import blog.category.insideApp.port.input.DtoForResponse.CategoryViewForLayout;
 import blog.category.insideApp.port.output.CategoryMethodForConnectDB;
+import blog.shared.businessLogic.port.incomming.LayoutRenderingUseCase;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryMethod categoryMethod;
-    private final CategoryMethodForConnectDB categoryMethodForConnectDB;
     private final CategoryValidator categoryValidator;
+    private final LayoutRenderingUseCase layoutRenderingUseCase;
     @GetMapping("/category/edit")
     public String editCategoryForm(Model model){
         var categoryDtoList = categoryMethod.getCategoryCountList(); // 카테고리별 post 개수 count 등록 후 반환
@@ -27,8 +28,9 @@ public class CategoryController {
 
         CategoryViewForLayout categoryViewForLayout = CategoryViewForLayout.from(categoryDtoList);
 
+        layoutRenderingUseCase.AddLayoutTo(model);
         model.addAttribute("categoryDtoForEdit", copyDtoList);
-        model.addAttribute("categoryView", categoryViewForLayout);
+        model.addAttribute("categoryViewForLayOut", categoryViewForLayout);
 
         return "admin/categoryEdit";
     }
@@ -39,6 +41,7 @@ public class CategoryController {
             baseCategoryDto.setCategoryTitle("base");
             categoryDtoList.add(baseCategoryDto);
         }
+
         categoryValidator.validate(categoryDtoList, errors);
         categoryMethod.changeCategory(categoryDtoList);
         return "변경 성공";

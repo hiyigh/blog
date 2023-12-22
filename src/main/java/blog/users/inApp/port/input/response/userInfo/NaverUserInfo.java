@@ -23,7 +23,7 @@ public class NaverUserInfo implements Oauth2UserInfo{
 
     @Override
     public String getEmail() {
-        return (String) attributes.get("email");
+        return (String) getProviderId().substring(0,5) + "@" + getProvider() + ".com";
     }
 
     @Override

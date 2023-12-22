@@ -13,7 +13,7 @@ import java.util.Locale;
 @Getter
 public class SiteMap {
     private static final String NAMESPACE = "http://www.sitemaps.org/schemas/sitemap/0.9";
-    private static final String ROOT = "https://www.717276.co.kr";
+    private static final String ROOT = "https://www.717276.store";
     private static final String CATEGORYPRE = "/post/list?";
     private static final String CATEGORYPRO = "/&page=1";
     private static final String POSTPRE = "/post/view?postId=";

@@ -30,16 +30,16 @@ public class CacheConfig {
         Cache layoutCache = new net.sf.ehcache.Cache(lyaoutCacheConfiguration);
         Objects.requireNonNull(cacheManagerFactoryBean().getObject()).addCache(layoutCache);
 
-        CacheConfiguration recentArticleCacheConfiguration = new CacheConfiguration()
+        CacheConfiguration recentPostCacheConfiguration = new CacheConfiguration()
                 .eternal(false)
                 .timeToIdleSeconds(3600)
                 .timeToLiveSeconds(3600)
                 .maxEntriesLocalHeap(100)
                 .memoryStoreEvictionPolicy("LRU")
-                .name("layoutRecentArticleCaching");
+                .name("layoutRecentPostCaching");
         //net.sf.ehcache 는 오픈 소스 캐싱 라이브러리의 패키지 경로이다.
-        Cache recentArticleCache = new net.sf.ehcache.Cache(recentArticleCacheConfiguration);
-        Objects.requireNonNull(cacheManagerFactoryBean().getObject()).addCache(recentArticleCache);
+        Cache recentPostCache = new net.sf.ehcache.Cache(recentPostCacheConfiguration);
+        Objects.requireNonNull(cacheManagerFactoryBean().getObject()).addCache(recentPostCache);
 
         CacheConfiguration recentCommentCacheConfiguration = new CacheConfiguration()
                 .eternal(false)

@@ -82,7 +82,7 @@ public class CategoryService implements CategoryMethod {
     public Optional<Category> findCategoryByTitle(String title) {
         return categoryMethodForConnectDB.findByTitle(title);
     }
-    @Cacheable(value = "layoutCaching", key = "0")
+    @Cacheable(value = "layoutCaching")
     @Override
     public CategoryViewForLayout getCategoryViewForLayout() {
         return CategoryViewForLayout.from(categoryMethodForConnectDB.getCategoryCount());

@@ -27,7 +27,7 @@
     <!--   카테고리 s   -->
     <li class="border-top my-3"></li>
     <li class="mb-1 superCategory btn fs-5"><a th:href="@{/post/list(categoryTitle=total,page=1)}"
-                                               th:text="|카테고리(${postTotalCount})|">토탈</a></li>
+                                               th:text="|전체글(${postTotalCount})|">토탈</a></li>
     <a th:href="@{/category/edit}" sec:authorize="hasRole('ADMIN')" class="me-0 ps-0 btn"><i class="fas fa-pen"></i></a>
 
     <li class="mb-1" th:each="superCategory : ${category?.getCategoryViewTreeList()}">

@@ -4,7 +4,6 @@ import blog.shared.exception.LoginFailHandler;
 import blog.users.domain.Role;
 import blog.users.inApp.port.input.response.MemberDetail;
 import blog.users.inApp.run.MemberDetailService;
-import blog.users.inApp.run.MemberService;
 import blog.users.inApp.run.Oauth2MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -15,9 +14,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -68,8 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                 .loginPage("/login")
                 .failureHandler(loginFailHandler)
-                .userInfoEndpoint()
-                .userService(oauth2MemberService)
+                .userInfoEndpoint().userService(oauth2MemberService)
                 ;
     }
     @Bean

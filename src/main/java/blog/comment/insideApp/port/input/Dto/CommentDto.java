@@ -40,12 +40,6 @@ public class CommentDto {
         this.memberId = comment.getMember().getMemberId();
     }
 
-    /*
-        - 재귀 호출용 스태틱 생성 메서드
-                1. DTO객체 생성후 소스를 큐처리로 순차적 매핑
-                2. Depth 변화시 재귀 호출 / 재귀 탈출
-                3. 탈출시 상위 카테고리 list로 삽입하여 트리구조 작성
-    */
     public static List<CommentDto> recursiveCommentDtoTree(List<Comment> source, int dept) {
         List<CommentDto> commentDtoList = new ArrayList<>();
         if (source.isEmpty() || source == null) return commentDtoList;

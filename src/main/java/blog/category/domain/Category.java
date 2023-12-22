@@ -22,7 +22,7 @@ public class Category extends BasicEntity {
     @Column(name= "category_title", nullable = false, length = 30, unique = true)
     private String categoryTitle;
 
-    @OneToMany(mappedBy = "category") // post 내부 category
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     private List<Post> postList = new ArrayList<>();
 
     private int cOrder; // sidebar 순서 정렬 및 조정
@@ -31,7 +31,7 @@ public class Category extends BasicEntity {
     @JoinColumn(name = "parents_id")
     private Category parents;
 
-    @OneToMany(mappedBy = "parents")
+    @OneToMany(mappedBy = "parents", cascade = CascadeType.REMOVE)
     private List<Category> child = new ArrayList<>();
 
     @Override

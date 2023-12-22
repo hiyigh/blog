@@ -27,11 +27,36 @@ public class CategoryViewForLayout {
 
     private static CategoryViewForLayout makeCategoryChildList(List<CategoryDto> source) {
         CategoryViewForLayout root = new CategoryViewForLayout();
-        for (int i = 0; i < source.size(); ++i) {
-            CategoryViewForLayout changeSource = changeToView(source.get(i));
-            root.getCategoryViewTreeList().add(changeSource);
+        if (source == null || source.isEmpty()) return root;
+
+        while (!source.isEmpty()) {
+            CategoryDto currentDto = source.get(0);
+            CategoryViewForLayout currentNode = changeToView(currentDto);
+            source.remove(0);
+
+            if (currentNode.getParents() == null) {
+                root.getCategoryViewTreeList().add(currentNode);
+
+            } else {
+                CategoryViewForLayout parentOrNull = findParentNode(root, currentNode.getCategoryTitle());
+                if (parentOrNull != null) {
+                    parentOrNull.getCategoryViewTreeList().add(currentNode);
+                }
+            }
         }
         return root;
+    }
+
+    private static CategoryViewForLayout findParentNode(CategoryViewForLayout root, String parentsTitle) {
+        for (CategoryViewForLayout node : root.getCategoryViewTreeList()) {
+            if (parentsTitle.equals(node.getCategoryTitle())) return node;
+
+            CategoryViewForLayout findParent = findParentNode(node, parentsTitle);
+            if (findParent != null) {
+                return findParent;
+            }
+        }
+        return null;
     }
 
     private static CategoryViewForLayout changeToView(CategoryDto categoryDto) {

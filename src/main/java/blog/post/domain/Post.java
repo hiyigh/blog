@@ -16,7 +16,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity // jpa entity 로 지정, 데이터베이스 테이블과 mapping 되는 객체이다.
+@Entity // jpa entity 로 지정, 데이터베이스 테이블과 mapping 되는 객체
 @Getter
 public class Post extends BasicEntity {
     @Id

@@ -48,7 +48,6 @@ public class PostController {
     private final CategoryMethod categoryMethod;
     private final MemberMethod memberMethod;
     private final LayoutRenderingUseCase layoutRenderingUseCase;
-
     @GetMapping("/post/write")
     public String getPostInputForm(Model model) {
         layoutRenderingUseCase.AddLayoutTo(model);
@@ -63,6 +62,7 @@ public class PostController {
                             @AuthenticationPrincipal MemberDetail memberDetail, Errors errors, Model model) {
         if(errors.hasErrors()) return "post/postWriteForm";
         PostCreateCommand postCreateCommand = null;
+
         if (oauth2MemberDetail == null) {
             postCreateCommand = PostCreateCommand.from(postInputForm, memberDetail.getMember().getMemberId());
         } else {
@@ -148,7 +148,9 @@ public class PostController {
     public String getPostListByKeyword(@RequestParam Integer page, @RequestParam String keyword, Model model) {
         Page<PostDtoForBox> postDtoForBoxes = postMethod.getPostDtoByKeyword(keyword, page);
         for (PostDtoForBox box : postDtoForBoxes) box.parseAndRenderForView();
+
         PagingBoxHandler pagingBoxHandler = PagingBoxHandler.create(page, (int)postDtoForBoxes.getTotalElements());
+
         layoutRenderingUseCase.AddLayoutTo(model);
         model.addAttribute("postList", postDtoForBoxes);
         model.addAttribute("pagingBox", pagingBoxHandler);
