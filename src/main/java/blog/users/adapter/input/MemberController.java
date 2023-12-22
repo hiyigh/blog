@@ -58,6 +58,7 @@ public class MemberController {
     @PostMapping("/join")
     public String join(@RequestParam String email, @RequestParam String password, @RequestParam String username, @RequestParam String userId) {
         Optional<Member> alreadyJoinOptional = memberMethodForDB.findByEmail(email);
+
         if (alreadyJoinOptional.isPresent()) {
             Member alreadyJoin = alreadyJoinOptional.get();
             if (alreadyJoin.getEmail().equals(email)) {
@@ -75,7 +76,7 @@ public class MemberController {
                 .password(memberDto.getPassword()).build();
         newMember.setRole(Role.USER);
         memberService.encodingPasswordAndSave(newMember);
-        return "/index";
+        return "redirect:/";
     }
 
 }

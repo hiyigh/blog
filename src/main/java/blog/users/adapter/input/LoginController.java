@@ -18,7 +18,7 @@ public class LoginController {
         this.loginService = loginService;
     }
     @GetMapping("/code/{registrationId}")
-    public void googleLogin(@RequestParam String code, @PathVariable String registrationId) {
+    public void Login(@RequestParam String code, @PathVariable String registrationId) {
         loginService.socialLogin(code, registrationId);
     }
 }
