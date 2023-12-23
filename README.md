@@ -70,6 +70,7 @@
 
 link : [http://ec2-3-35-143-36.ap-northeast-2.compute.amazonaws.com:8080](http://ec2-3-35-143-36.ap-northeast-2.compute.amazonaws.com:8080/)
 
-# 수정
-## 로그인
-- 구글 , 네이버 api 오류
+# Error
+- 구글 , 네이버 api 로그인
+- 도메인 연결
+- git action  
