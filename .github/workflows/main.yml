@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BUCKET_NAME: aws-s3-blog-bucket
+      CODE_DEPLOY_APP_NAME: webserive-cicd
+      DEPLOYMENT_GROUP_NAME: webservice_deploy_instance
     steps:
       - uses: actions/checkout@v2
       
