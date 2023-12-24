@@ -7,6 +7,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      BUCKET_NAME: aws-s3-blog-bucket
     steps:
       - uses: actions/checkout@v2
       
