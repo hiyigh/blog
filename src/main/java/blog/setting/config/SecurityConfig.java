@@ -25,7 +25,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final Oauth2MemberService oauth2MemberService; // user 정보를 외부에서 가져와 spring framework 에 전달
     private final MemberDetailService memberService;
-
     private final LoginFailHandler loginFailHandler; // login 실패시 error 호출에 필요한 변수 클래스
 
     @Override

@@ -15,12 +15,10 @@ public class LoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         String errMsg = "";
-
         if(exception instanceof OAuth2AuthenticationException) {
             errMsg = "OAuth2AuthenticationException";
             request.setAttribute("errMsg", errMsg);
         }
-
         setDefaultFailureUrl("/login?error="+errMsg);
         super.onAuthenticationFailure(request, response, exception);
     }
