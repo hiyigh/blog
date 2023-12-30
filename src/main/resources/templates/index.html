@@ -71,7 +71,7 @@
         <div class="col g-1 g-md-4" th:each="post,num : ${popularPosts}">
           <a th:href="@{/post/view(postId=${post.getPostId()})}">
             <div class=" card ratio ratio-1x1 popular-card "
-                 th:style="|background-image: url(${post.getThumbnailUrl()} ?: '/img/default-img.jpg'); background-position: center; background-size: cover;|">
+                 th:style="|background-image: url(${#strings.isEmpty(post.getThumbnailUrl()) ? '/img/defaultThumbNail.png' : post.getThumbnailUrl()}); background-position: center; background-size: cover;|">
               <div class="card-description text-center">
                 <small><small th:text="|작성일 : ${#temporals.format(post.getCreatedDate(), 'yyyy-MM-dd')}|"></small></small>
                 <p class="text-truncate" th:text="${post.getPostTitle()}">타이틀</p>

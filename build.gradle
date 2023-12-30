@@ -32,6 +32,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.session:spring-session-jdbc'
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'org.projectlombok:lombok:1.18.26'
     runtimeOnly 'mysql:mysql-connector-java'
     // security and authorization
     implementation 'org.springframework.boot:spring-boot-starter-security'
