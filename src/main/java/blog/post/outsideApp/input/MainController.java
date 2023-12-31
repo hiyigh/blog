@@ -39,6 +39,9 @@ public class MainController {
     @GetMapping("/aboutMe")
     public String aboutMe(Model model) {
         layoutRenderingUseCase.AddLayoutTo(model);
+        model.addAttribute("pageTitle", "신입 개발자 입니다.");
+        model.addAttribute("welcome", "welcome.");
+        model.addAttribute("aboutMe", "");
         return "aboutMe";
     }
 }
