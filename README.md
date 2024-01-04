@@ -2,7 +2,7 @@
 - ~구글 , 네이버 api 로그인~
 - 도메인 연결
 - intellij git 연동 commit 잔디 문제 ??
-      github commit 은 제대로 반영됨
+      (github commit 은 제대로 반영)
 # 추가
 - ~배포~ 
 - ~자동 배포~ 
