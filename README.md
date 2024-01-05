@@ -5,7 +5,9 @@
       (github commit 은 제대로 반영)
 # 추가
 - ~배포~ 
-- ~자동 배포~ 
+- ~자동 배포~
+- chatgpt api 등록
+- 자동 기록 저장
 - 무중단 배포
 # Project
 ---
