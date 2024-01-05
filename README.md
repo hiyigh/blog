@@ -3,13 +3,12 @@
 - 도메인 연결
 - intellij git 연동 commit 잔디 문제
       (github commit 은 제대로 반영)
-- github commit -> code Deploy to EC2 instance error
+- ~github commit -> code Deploy to EC2 instance error~
 # 추가
 - ~배포~ 
 - ~자동 배포~
 - chatgpt api 등록
 - 자동 기록 저장
-- 무중단 배포
 # Project
 ---
 
@@ -47,11 +46,11 @@
   - google 로그인 token : secret access key (관련 키 재발급)
  
 - EC2
-      - 무한 로딩 : memory swap
-      - bash 언어 : \
+  - 무한 로딩 : memory swap
+  - bash 언어 : \
 - github
-      - 잔디
+  - 잔디
 - AWS
-      - 접속 실패 : 로컬은 문제 없이 동작, dns 접속만 안됨 -> ec2 public dns 연결 문제 -> 포트 번호 설정 문제
+  - 접속 실패 : 로컬은 문제 없이 동작, dns 접속만 안됨 -> ec2 public dns 연결 문제 -> 포트 번호 설정 문제
 - Deploy
-      - DeploymentLimitExceededException -> deploy log 확인 -> Missing credential -> IAM 역할 문제? -> EC2 IAM role 미부여 -> restart? 
+  - DeploymentLimitExceededException -> deploy log 확인 -> Missing credential -> IAM 역할 문제? -> EC2 IAM role 미부여 -> EC2 등록 후 재배포, 재실행 (언제 잘 못된건지) 
