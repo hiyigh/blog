@@ -1,8 +1,8 @@
 package blog.shared.businessLogic.port.incomming;
 
-import blog.category.insideApp.port.input.CategoryMethod;
-import blog.comment.insideApp.port.input.CommentMethod;
-import blog.post.insideApp.connetionPart.input.PostMethod;
+import blog.category.application.port.input.CategoryMethod;
+import blog.comment.application.port.input.CommentMethod;
+import blog.post.application.connetionPart.input.PostMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;

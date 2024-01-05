@@ -1,7 +1,7 @@
 package blog.users.adapter.output;
 
 import blog.users.domain.Member;
-import blog.users.inApp.port.output.MemberMethodForDB;
+import blog.users.application.port.output.MemberMethodForDB;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

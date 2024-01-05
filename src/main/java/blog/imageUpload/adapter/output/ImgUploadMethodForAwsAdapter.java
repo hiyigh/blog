@@ -1,7 +1,7 @@
 package blog.imageUpload.adapter.output;
 
 import blog.imageUpload.domain.ImgFile;
-import blog.imageUpload.inApp.port.output.ImgUploadMethodForAWS;
+import blog.imageUpload.application.port.output.ImgUploadMethodForAWS;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;

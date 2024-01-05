@@ -1,7 +1,7 @@
 package blog.imageUpload.adapter.input;
 
 import blog.imageUpload.domain.ImgFile;
-import blog.imageUpload.inApp.port.output.ImgUploadMethodForAWS;
+import blog.imageUpload.application.port.output.ImgUploadMethodForAWS;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

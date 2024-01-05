@@ -2,9 +2,8 @@ package blog.setting.config;
 
 import blog.shared.exception.LoginFailHandler;
 import blog.users.domain.Role;
-import blog.users.inApp.port.input.response.MemberDetail;
-import blog.users.inApp.run.MemberDetailService;
-import blog.users.inApp.run.Oauth2MemberService;
+import blog.users.application.run.MemberDetailService;
+import blog.users.application.run.Oauth2MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
