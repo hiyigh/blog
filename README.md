@@ -39,7 +39,7 @@
 - AWS S3
 
 # 다이어그램
-
+https://github.com/hiyigh/blog/issues/1#issue-2070145581
 # 트러블 슈팅
 ---              
 - 소셜 로그인
