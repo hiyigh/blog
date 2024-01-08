@@ -39,9 +39,8 @@
 - AWS S3
 
 # 다이어그램
-<p align="center">
-  <img src="https://github.com/hiyigh/blog/issues/1#issue-2070145581">
-</p>
+![blog drawio](https://github.com/hiyigh/blog/assets/112844031/32d1ccd2-a0d8-49f0-beef-e94b64b741e4)
+
 
 # 트러블 슈팅
 ---              
