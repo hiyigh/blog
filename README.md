@@ -40,7 +40,7 @@
 
 # 다이어그램
 <p align="center">
-  <img src="[이미지URL](https://github.com/hiyigh/blog/issues/1#issue-2070145581)">
+  <img src="https://github.com/hiyigh/blog/issues/1#issue-2070145581">
 </p>
 
 # 트러블 슈팅
