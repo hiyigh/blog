@@ -19,7 +19,7 @@ public class Tag extends BasicEntity {
     private String tagName;
 
     @OneToMany(mappedBy = "tag")
-    private List<PostTagList> postTagListList = new ArrayList<>();
+    private List<PostTagList> postTagList = new ArrayList<>();
 
     public Tag(String tagName) {
         this.tagName = tagName;

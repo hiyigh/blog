@@ -30,13 +30,11 @@
                                                th:text="|전체글(${postTotalCount})|">토탈</a></li>
     <a th:href="@{/category/edit}" sec:authorize="hasRole('ADMIN')" class="me-0 ps-0 btn"><i class="fas fa-pen"></i></a>
 
-    <li class="mb-1" th:each="superCategory : ${category?.getCategoryViewTreeList()}">
+    <li class="mb-1" th:each="superCategory : ${category.getCategoryViewTreeList}">
       <div class="btn-group">
-        <button class="btn btn-toggle align-items-center rounded collapsed me-0 pe-0">
-        </button>
-        <a th:href="@{/post/list(categoryTitle=${superCategory.getCategoryTitle()},page=1)}"
-           class="ms-0 superCategory btn fs-5"
-           th:text="|${superCategory.getCategoryTitle()}(${superCategory.getCount()})|">슈퍼</a>
+        <button class="btn btn-toggle align-items-center rounded collapsed me-0 pe-0"></button>
+        <a th:href="@{/post/list(categoryTitle = ${superCategory.getCategoryTitle()},page=1)}" class="ms-0 superCategory btn fs-5"
+           th:text="|${superCategory.getCategoryTitle()}(${superCategory.getCount()})|">카테고리</a>
       </div>
     </li>
     <!--    카테고리 e    -->
