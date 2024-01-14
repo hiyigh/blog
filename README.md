@@ -1,14 +1,13 @@
-# error
-- ~구글 , 네이버 api 로그인~
-- 도메인 연결
-- intellij git 연동 commit 잔디 문제
-      (github commit 은 제대로 반영)
-- ~github commit -> code Deploy to EC2 instance error~
 # 추가
 - ~배포~ 
 - ~자동 배포~
-- chatgpt api 등록
-- 자동 기록 저장
+- chatgpt 검색 기능 추가 -> vue.js 수정, 추가 진행 중 
+  
+# error
+- ~구글 , 네이버 api 로그인~
+- 도메인 연결
+- intellij git 연동 commit 잔디 미반영      
+- ~github commit -> code Deploy to EC2 instance error~
 # Project
 ---
 
