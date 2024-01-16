@@ -44,3 +44,4 @@ bin/
 application-oauth.properties
 application-mariadb.properties
 application-credential.properties
+application-chatgpt.properties
