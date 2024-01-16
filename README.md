@@ -1,12 +1,13 @@
-# Error
-- ~구글 , 네이버 api 로그인~
-- 도메인 연결
-- intellij git 연동 commit 잔디 문제 ??
-      (github commit 은 제대로 반영)
 # 추가
 - ~배포~ 
-- ~자동 배포~ 
-- 무중단 배포
+- ~자동 배포~
+- chatgpt 검색 기능 추가 -> vue.js 수정, 추가 진행 중 
+  
+# error
+- ~구글 , 네이버 api 로그인~
+- 도메인 연결
+- intellij git 연동 commit 잔디 미반영      
+- ~github commit -> code Deploy to EC2 instance error~
 # Project
 ---
 
@@ -35,37 +36,23 @@
 - AWS EC2
 - AWS RDS
 - AWS S3
-- AWS Route53
 
-### 기타
-- Lombok
-- Toast Ui Editor
+# 다이어그램
+![blog drawio](https://github.com/hiyigh/blog/assets/112844031/32d1ccd2-a0d8-49f0-beef-e94b64b741e4)
 
-# 구현
----
 
-- 게시글 구현과 작성 권한 부여
-    - 게시글 CRUD 를 구현하고
-    spring boots security 라이브러리를 사용하여
-    admin 권한을 가진 사용자만 게시글을 작성할 수 있도록 하였습니다.
-- 댓글과 하위 댓글 구현
-    - 셀프 조인 참조로 댓글 간 계층을 나타낼 수 있도록 하였고,
-      해당 변수를 사용한 재귀적 방식으로 트리 구조 객체를 반환하도록 설계하였습니다.
-        
-- 카테고리 구현
-    - 기초적인 카테고리 구현하였으며,        
-      cascade 구문을 추가하여 카테고리 삭제시 게시글도 같이 삭제되도록 구현하였습니다.
-        
+# 트러블 슈팅
+---              
 - 소셜 로그인
-    - Oauth2 인증 방식과 Spring Boots Security 를 사용하여 전달 받은 토큰으로 사용자를 인증할 수 있도록 하였습니다.
-    - 새로운 소셜 로그인 api 추가를 위해 interface 를 사용하여 객체 생성과, 유저 정보를 전달받을수 있도록 하였습니다.
-- 자동 저장 기능
-    - 글 작성 시 AJAX 요청을 통해 임시 저장할 수 있는 기능을 추가하였습니다.
-- 캐싱
-    - 고정된 카테고리 목록, 메인 화면상의 게시글을 매 번 호출 하는 것은 비효율적이기 때문에 EhCache 라이브러리를 사용하여 캐시 처리하였고, 변동이 생기는 경우 캐시가 삭제되도록 하였습니다.
-- 태그 , 검색 기능
-    - 검색어로 데이터를 불러오기 위해 like % 쿼리를 작성하여 검색 기능을 만들었습니다.
-    - 태그의 다른 기능들은 tagify 라이브러리를 사용하였습니다.
-- 페이징
-    - 페이징 처리를 위해 페이징 박스 핸들러 클래스 작성하였고, 
-    해당 클래스를 사용하여 현재 위치와 페이지 박스 숫자를 가져와 게시글 목록을 조회할 수 있도록 구현하였습니다.
+  - Oauth2 로그인, 기존 로그인 token 처리
+  - google 로그인 token : secret access key (관련 키 재발급)
+ 
+- EC2
+  - 무한 로딩 : memory swap
+  - bash 언어 : \
+- github 
+  - 잔디 -> 사용자 정보 전달 문제 ? 
+- AWS
+  - 접속 실패 : 로컬은 문제 없이 동작, dns 접속만 안됨 -> ec2 public dns 연결 문제 -> 포트 번호 설정 문제
+- Deploy
+  - DeploymentLimitExceededException -> deploy log 확인 -> Missing credential -> IAM 역할 문제? -> EC2 IAM role 미부여 -> EC2 등록 후 재배포, 재실행 (언제 잘 못된건지) 
